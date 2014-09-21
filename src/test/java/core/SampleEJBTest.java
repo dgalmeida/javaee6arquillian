@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.logging.Logger;
 import org.jboss.shrinkwrap.api.Archive;
-import util.WebArchiveGenerator;
+import util.WarGenerator;
 
 
 @RunWith(Arquillian.class)
@@ -19,7 +19,7 @@ public class SampleEJBTest
 {
     @Deployment public static Archive<?> createTestArchive()
     {
-        return WebArchiveGenerator.createBaseWar("sampleTest", "core");
+        return WarGenerator.createBaseWar("sampleTest", "core");
     }
 
 

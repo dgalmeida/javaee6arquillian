@@ -10,38 +10,42 @@ import java.io.File;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
 
-public class WebArchiveGenerator
+public class WarGenerator implements Generator
 {
-    public static WebArchive webArchive;
-    public static final String appTempNameDefault = "test.war";
 
-    public static WebArchive createBaseWar(String appTempName,String... pacote)
+    private static WebArchive webArchive;
+
+
+    public WebArchive createBaseWar(String appTempName, String... pacote)
     {
-        webArchive = ShrinkWrap.create(WebArchive.class, configAppName(appTempName))
+        webArchive = ShrinkWrap
+                .create(WebArchive.class, configAppName(appTempName))
                 .addPackages(true, pacote);
 
         addDependenciesFromPom();
-        addResourcesAndWebFiles("src/main/resources");
-        addResourcesAndWebFiles("src/main/webapp/WEB-INF");
+        addResourcesAndWebFiles(RESOURCES_PATH);
+        addResourcesAndWebFiles(WEBFILES_PATH);
 
         return webArchive;
     }
 
-    private static String configAppName(String appTempName)
+    private static String configAppName(String deploymentName)
     {
-        if(isNullOrEmpty(appTempName))
-            return appTempNameDefault;
+        if(isNullOrEmpty(deploymentName))
+            return DEPLOYMENT_NAME;
         else
-            return appTempName+=".war";
+            return deploymentName+= ARCHIVE_TYPE;
     }
 
     private static void addDependenciesFromPom()
     {
-        webArchive.addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
-                .importDependencies(ScopeType.RUNTIME, ScopeType.COMPILE)
-                .resolve()
-                .withTransitivity()
-                .asFile()
+        webArchive.addAsLibraries(
+            Maven.resolver()
+                    .loadPomFromFile(POM)
+                    .importDependencies(ScopeType.RUNTIME, ScopeType.COMPILE)
+                    .resolve()
+                    .withTransitivity()
+                    .asFile()
         );
     }
 
@@ -55,16 +59,18 @@ public class WebArchiveGenerator
                 addResourcesAndWebFiles(file.getPath());
             else
                 addResourceOrWebInf(targetPath, file);
-
         }
     }
 
     private static void addResourceOrWebInf(String targetPath, File file)
     {
-        if(targetPath.contains("webapp"))
+        if(targetPath.contains(WEBAPP_FOLDER))
             webArchive.addAsWebInfResource(file);
         else
-            webArchive.addAsResource("META-INF/" + file.getName(), "META-INF/" + file.getName());
+            webArchive.addAsResource(
+                    META_INF_PATH + file.getName(),
+                    META_INF_PATH + file.getName()
+            );
     }
 
     private static File[] collectFiles(String targetPath)
