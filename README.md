@@ -1,6 +1,6 @@
 ## Sample Java EE 6 with Arquillian for Jboss AS 7.2.0.Final
 
-Created with maven 3.2.1 with archetype: org.jboss.spec.archetypes:jboss-javaee6-webapp
+Created with maven 3.2.1 and archetype: org.jboss.spec.archetypes:jboss-javaee6-webapp
 
 
 # Setup
