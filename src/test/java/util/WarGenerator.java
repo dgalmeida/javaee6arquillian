@@ -10,7 +10,7 @@ import java.io.File;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
 
-public class WarGenerator implements Generator
+public class WarGenerator implements WarConfig
 {
 
     private static WebArchive webArchive;
