@@ -17,22 +17,20 @@ import util.WebArchiveGenerator;
 @RunWith(Arquillian.class)
 public class SampleEJBTest
 {
-    @Deployment
-    public static Archive<?> createTestArchive()
+    @Deployment public static Archive<?> createTestArchive()
     {
         return WebArchiveGenerator.createBaseWar("sampleTest", "core");
     }
 
-    @Inject
-    SampleEJB sampleEJB;
 
-    @Inject
-    Logger log;
+    @Inject SampleEJB sampleEJB;
 
-    @Test
-    public void testRegister() throws Exception
+
+    @Inject Logger log;
+
+
+    @Test public void testRegister() throws Exception
     {
-
         assertNotNull(sampleEJB);
         assertTrue(sampleEJB.getMsg().contains("Hello"));
 

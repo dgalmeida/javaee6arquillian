@@ -11,10 +11,8 @@ public class SampleEJB
 
    private static final String hello = "Hello world, I'm a javaEE 6 webapp with arquillian test";
 
-
    public String getMsg() {
       return hello;
    }
-
 
 }

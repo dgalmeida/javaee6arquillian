@@ -7,9 +7,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class SampleManagedBean
 {
-    @EJB
-    SampleEJB sampleEJB;
-
+    @EJB SampleEJB sampleEJB;
 
     public String getMsgFromEJB(){
         return sampleEJB.getMsg();

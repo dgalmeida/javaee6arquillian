@@ -10,7 +10,6 @@
         <property name="deploymentExportPath">target/arq-deployments</property>
     </engine>-->
 
-
     <container qualifier="arq-jbossas-managed" default="true"  >
         <configuration>
             <property name="jbossHome">/Users/dgralmeida/app-servers/jboss-as-7.2.0.Final</property>

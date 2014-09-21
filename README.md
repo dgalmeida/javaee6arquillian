@@ -4,6 +4,6 @@ Created with maven 3.2.1 with archetype: org.jboss.spec.archetypes:jboss-javaee6
 
 
 # Setup
-    -Change the <jboss.home> into POM.xml
+    -Change the "jboss home" into /pom.xml and test/java/resource.xml
     -Run with: mvn clean test -Parq-jbossas-managed for managed mode
     -Or: mvn clean test -Parq-jbossas-remote after start JBOSS AS 7 by yourself
