@@ -13,5 +13,4 @@ public interface WarConfig
     String RESOURCES_PATH = "src/main/resources";
     String WEBFILES_PATH = "src/main/webapp/WEB-INF";
 
-    public WebArchive createBaseWar(String appTempName, String... pacote);
 }

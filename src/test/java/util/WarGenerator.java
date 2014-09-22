@@ -15,7 +15,7 @@ public class WarGenerator implements WarConfig
 
     private static WebArchive webArchive;
 
-    public WebArchive createBaseWar(String appTempName, String... pacote)
+    public static WebArchive createBaseWar(String appTempName, String... pacote)
     {
         webArchive = ShrinkWrap
                 .create(WebArchive.class, configAppName(appTempName))
