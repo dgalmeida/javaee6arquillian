@@ -15,16 +15,15 @@ public class WarGenerator implements WarConfig
 
     private static WebArchive webArchive;
 
-
     public WebArchive createBaseWar(String appTempName, String... pacote)
     {
         webArchive = ShrinkWrap
                 .create(WebArchive.class, configAppName(appTempName))
                 .addPackages(true, pacote);
 
-        addDependenciesFromPom();
-        addResourcesAndWebFiles(RESOURCES_PATH);
-        addResourcesAndWebFiles(WEBFILES_PATH);
+        addPomDependencies();
+        addFileFrom(RESOURCES_PATH);
+        addFileFrom(WEBFILES_PATH);
 
         return webArchive;
     }
@@ -37,7 +36,7 @@ public class WarGenerator implements WarConfig
             return deploymentName+= ARCHIVE_TYPE;
     }
 
-    private static void addDependenciesFromPom()
+    private static void addPomDependencies()
     {
         webArchive.addAsLibraries(
             Maven.resolver()
@@ -49,14 +48,14 @@ public class WarGenerator implements WarConfig
         );
     }
 
-    private static void addResourcesAndWebFiles(String targetPath)
+    private static void addFileFrom(String targetPath)
     {
         File[] files = collectFiles(targetPath);
 
         for (File file : files)
         {
             if (file.isDirectory())
-                addResourcesAndWebFiles(file.getPath());
+                addFileFrom(file.getPath());
             else
                 addResourceOrWebInf(targetPath, file);
         }
