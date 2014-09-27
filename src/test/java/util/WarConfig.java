@@ -1,11 +1,8 @@
 package util;
 
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-
-
 public interface WarConfig
 {
-    String DEPLOYMENT_NAME = "test.war";
+    String DEPLOYMENT_DEFAULT_NAME = "test.war";
     String META_INF_PATH = "META-INF/";
     String WEBAPP_FOLDER = "webapp";
     String POM = "pom.xml";

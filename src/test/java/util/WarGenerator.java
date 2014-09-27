@@ -31,9 +31,9 @@ public class WarGenerator implements WarConfig
     private static String configAppName(String deploymentName)
     {
         if(isNullOrEmpty(deploymentName))
-            return DEPLOYMENT_NAME;
+            return DEPLOYMENT_DEFAULT_NAME;
         else
-            return deploymentName+= ARCHIVE_TYPE;
+            return deploymentName+=ARCHIVE_TYPE;
     }
 
     private static void addPomDependencies()
@@ -66,10 +66,7 @@ public class WarGenerator implements WarConfig
         if(targetPath.contains(WEBAPP_FOLDER))
             webArchive.addAsWebInfResource(file);
         else
-            webArchive.addAsResource(
-                    META_INF_PATH + file.getName(),
-                    META_INF_PATH + file.getName()
-            );
+            webArchive.addAsResource(META_INF_PATH + file.getName());
     }
 
     private static File[] collectFiles(String targetPath)
